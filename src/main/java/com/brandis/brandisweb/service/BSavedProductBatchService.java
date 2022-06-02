@@ -1,6 +1,7 @@
 package com.brandis.brandisweb.service;
 
 import com.brandis.brandisweb.model.BProduct;
+import com.brandis.brandisweb.model.BProductBatch;
 import com.brandis.brandisweb.model.BSavedProductBatch;
 import com.brandis.brandisweb.repository.BSavedProductBatchRepository;
 import com.brandis.brandisweb.util.DateUtil;
@@ -61,5 +62,9 @@ public class BSavedProductBatchService implements BaseService<BSavedProductBatch
         savedProductBatch.setExpirationDate(DateUtil.addDate(dateOfPurchase,
                 product.getExpirationTime()));
         return repository.save(savedProductBatch);
+    }
+
+    public BSavedProductBatch createFromBatch(BProductBatch productBatch){
+        return create(productBatch.getAmount(), productBatch.getDateBought(), productBatch.getBProduct());
     }
 }

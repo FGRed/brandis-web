@@ -2,10 +2,11 @@ package com.brandis.brandisweb.config;
 
 import com.brandis.brandisweb.model.BProduct;
 import com.brandis.brandisweb.model.BProductBatch;
+import com.brandis.brandisweb.model.BSavedProductBatch;
 import com.brandis.brandisweb.model.BUser;
-import com.brandis.brandisweb.repository.BProductPatchRepository;
 import com.brandis.brandisweb.repository.BProductRepository;
 import com.brandis.brandisweb.service.BProductPatchService;
+import com.brandis.brandisweb.service.BSavedProductBatchService;
 import com.brandis.brandisweb.service.BUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +28,9 @@ public class DatabaseInitzr {
     @Autowired
     private BProductRepository bProductRepository;
 
+    @Autowired
+    private BSavedProductBatchService bSavedProductBatchService;
+
 
     @Bean
     CommandLineRunner initDatabase1(){
@@ -46,7 +50,8 @@ public class DatabaseInitzr {
             BProductBatch bProductBatch = bProductPatchService.create(100L, new Date(), bProduct0);
             Assert.notNull(bProductBatch.getId());
 
-
+            BSavedProductBatch bSavedProductBatch = bSavedProductBatchService.createFromBatch(bProductBatch);
+            Assert.notNull(bSavedProductBatch.getId());
 
         };
     }
