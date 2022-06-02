@@ -14,7 +14,7 @@ public class BProduct {
     private Long id;
     @Column(length = 100)
     private String name;
-    private Long daysTillExpiration;
+    private int daysTillExpiration;
     @Column(scale = 2)
     private Double price;
 }
