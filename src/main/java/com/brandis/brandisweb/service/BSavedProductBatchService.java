@@ -59,7 +59,7 @@ public class BSavedProductBatchService implements BaseService<BSavedProductBatch
         savedProductBatch.setAmount(amount);
         savedProductBatch.setBProduct(product);
         savedProductBatch.setExpirationDate(DateUtil.addDate(dateOfPurchase,
-                product.getDaysTillExpiration()));
+                product.getExpirationTime()));
         return repository.save(savedProductBatch);
     }
 }
