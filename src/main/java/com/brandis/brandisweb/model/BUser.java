@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -25,8 +26,14 @@ public class BUser implements UserDetails {
     private String email;
 
     @NotNull
-    @Column(length = 50)
     private String password;
+
+    private Date dateCreated;
+
+    @PrePersist
+    private void prePersist(){
+        dateCreated = new Date();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
