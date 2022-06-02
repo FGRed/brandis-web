@@ -36,14 +36,14 @@ public class DatabaseInitzr {
             Assert.notNull(user0);
 
             BProduct bProduct = new BProduct();
-            bProduct.setDaysTillExpiration(30);
+            bProduct.setExpirationTime(30);
             bProduct.setName("Puikula");
             bProduct.setPrice(1.27);
 
             BProduct bProduct0 = bProductRepository.save(bProduct);
-            Assert.notNull(bProduct.getId());
+            Assert.notNull(bProduct0.getId());
 
-            BProductBatch bProductBatch = bProductPatchService.create(100L, new Date(), bProduct);
+            BProductBatch bProductBatch = bProductPatchService.create(100L, new Date(), bProduct0);
             Assert.notNull(bProductBatch.getId());
 
 

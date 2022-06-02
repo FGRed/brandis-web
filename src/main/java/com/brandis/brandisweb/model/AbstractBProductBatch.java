@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class AbstractBProductBatch {
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private BProduct bProduct;
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
