@@ -1,4 +1,4 @@
-package com.brandis.brandisweb.model;
+package com.brandis.brandisweb.model.bproduct;
 
 import lombok.Getter;
 import lombok.Setter;

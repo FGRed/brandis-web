@@ -1,8 +1,8 @@
 package com.brandis.brandisweb.service;
 
-import com.brandis.brandisweb.model.BProduct;
-import com.brandis.brandisweb.model.BProductBatch;
-import com.brandis.brandisweb.model.BSavedProductBatch;
+import com.brandis.brandisweb.model.bproduct.BProduct;
+import com.brandis.brandisweb.model.bproductbatch.BProductBatch;
+import com.brandis.brandisweb.model.bproductbatch.BSavedProductBatch;
 import com.brandis.brandisweb.repository.BSavedProductBatchRepository;
 import com.brandis.brandisweb.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;

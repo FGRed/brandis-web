@@ -1,6 +1,6 @@
 package com.brandis.brandisweb.repository;
 
-import com.brandis.brandisweb.model.BProduct;
+import com.brandis.brandisweb.model.bproduct.BProduct;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
