@@ -1,5 +1,7 @@
-package com.brandis.brandisweb.model;
+package com.brandis.brandisweb.model.bproductbatch;
 
+import com.brandis.brandisweb.model.bproduct.BProduct;
+import com.brandis.brandisweb.model.bgame.BGame;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,4 +21,7 @@ public class AbstractBProductBatch {
     private Long amount;
     private Date expirationDate;
     private Date dateBought;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "bgame_id", referencedColumnName = "id")
+    private BGame bGame;
 }

@@ -1,6 +1,6 @@
 package com.brandis.brandisweb.service;
 
-import com.brandis.brandisweb.model.BProduct;
+import com.brandis.brandisweb.model.bproduct.BProduct;
 
 import java.util.Date;
 

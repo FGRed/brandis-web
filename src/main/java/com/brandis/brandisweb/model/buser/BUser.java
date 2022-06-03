@@ -1,4 +1,4 @@
-package com.brandis.brandisweb.model;
+package com.brandis.brandisweb.model.buser;
 
 import com.sun.istack.NotNull;
 import lombok.Getter;

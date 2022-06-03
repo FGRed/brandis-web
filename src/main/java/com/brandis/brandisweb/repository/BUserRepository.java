@@ -1,6 +1,6 @@
 package com.brandis.brandisweb.repository;
 
-import com.brandis.brandisweb.model.BUser;
+import com.brandis.brandisweb.model.buser.BUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

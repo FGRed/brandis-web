@@ -1,9 +1,11 @@
 package com.brandis.brandisweb.config;
 
-import com.brandis.brandisweb.model.BProduct;
-import com.brandis.brandisweb.model.BProductBatch;
-import com.brandis.brandisweb.model.BSavedProductBatch;
-import com.brandis.brandisweb.model.BUser;
+import com.brandis.brandisweb.model.bgame.BGame;
+import com.brandis.brandisweb.model.bproduct.BProduct;
+import com.brandis.brandisweb.model.bproductbatch.BProductBatch;
+import com.brandis.brandisweb.model.bproductbatch.BSavedProductBatch;
+import com.brandis.brandisweb.model.buser.BUser;
+import com.brandis.brandisweb.repository.BGameRepository;
 import com.brandis.brandisweb.repository.BProductRepository;
 import com.brandis.brandisweb.service.BProductPatchService;
 import com.brandis.brandisweb.service.BSavedProductBatchService;
@@ -31,6 +33,9 @@ public class DatabaseInitzr {
     @Autowired
     private BSavedProductBatchService bSavedProductBatchService;
 
+    @Autowired
+    private BGameRepository bGameRepository;
+
 
     @Bean
     CommandLineRunner initDatabase1(){
@@ -53,6 +58,13 @@ public class DatabaseInitzr {
             BSavedProductBatch bSavedProductBatch = bSavedProductBatchService.createFromBatch(bProductBatch);
             Assert.notNull(bSavedProductBatch.getId());
 
+            BGame bGame = new BGame();
+            bGame.setCompanyName("Brandis");
+
+            bProductBatch.setBGame(bGame);
+
+            bGameRepository.save(bGame);
+            bSavedProductBatchService.save(bSavedProductBatch);
         };
     }
 }

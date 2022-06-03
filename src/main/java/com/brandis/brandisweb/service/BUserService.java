@@ -1,7 +1,7 @@
 package com.brandis.brandisweb.service;
 
 import com.brandis.brandisweb.exception.UserException;
-import com.brandis.brandisweb.model.BUser;
+import com.brandis.brandisweb.model.buser.BUser;
 import com.brandis.brandisweb.repository.BUserRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
