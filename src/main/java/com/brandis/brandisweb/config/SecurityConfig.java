@@ -24,12 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/css/**", "/js/**", "/sign-in/**")
+                .antMatchers( "/css/**", "/js/**", "/sign-in/**","/h2-console/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in/")
+                .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()

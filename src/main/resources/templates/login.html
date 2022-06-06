@@ -4,7 +4,13 @@
     <title>Spring Boot User Authentication</title>
 </head>
 <body>
-<form role="form" th:action="@{/login/}" th:method="post">
+<form role="form" th:action="@{/login}" th:method="post">
+    <div th:if="${param.error}">
+        Viallinen käyttäjänimi tai salasana.
+    </div>
+    <div th:if="${param.logout}">
+        Olet kirjautunut ulos.
+    </div>
     <lable>Username</lable>
     <input type="text" id="username" name="username">
 
