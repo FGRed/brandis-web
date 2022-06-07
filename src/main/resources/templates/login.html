@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<head>
+    <title>Spring Boot User Authentication</title>
+</head>
+<body>
+
+<script>
+    function switchMode(){
+        console.log("In function");
+        var reg = document.querySelector("#registerForm");
+        console.log("TEST: " + reg);
+        var log = document.querySelector("#logInForm");
+        if(reg.style.display == "inline"){
+            console.log("Setting visible");
+            reg.style.display = "none";
+            log.style.display = "inline";
+        }else{
+            console.log("Setting hidden");
+            reg.style.display = "inline";
+            log.style.display = "none";
+        }
+    }
+
+</script>
+<div class="container">
+<form  id="logInForm" role="form" th:action="@{/login}" th:method="post" style="display: inline">
+    <div th:if="${param.error}">
+        Viallinen käyttäjänimi tai salasana.
+    </div>
+    <div th:if="${param.logout}">
+        Olet kirjautunut ulos.
+    </div>
+    <lable>Email</lable>
+    <input class="form-control" type="text" id="username" name="username">
+
+    <lable>Password</lable>
+    <input class="form-control" type="password" id="password" name="password">
+
+    <input class="form-control" type="submit" value="Log in">
+</form>
+<form id="registerForm" style="display: none" >
+    <lable>Email</lable>
+    <input class="form-control" type="text" id="new-username" name="new-username">
+
+    <lable>Password</lable>
+    <input class="form-control" type="password" id="new-password" name="new-password">
+
+    <lable>Password again</lable>
+    <input class="form-control" type="password" id="new-password2" name="new-password">
+    <input class="form-control" type="submit" value="Register">
+</form>
+<input class="form-control" type="button" onclick="switchMode()" value="Register new account">
+</div>
+</body>
+</html>
