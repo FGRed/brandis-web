@@ -10,12 +10,15 @@ import com.brandis.brandisweb.repository.BProductRepository;
 import com.brandis.brandisweb.service.BProductPatchService;
 import com.brandis.brandisweb.service.BSavedProductBatchService;
 import com.brandis.brandisweb.service.BUserService;
+import com.brandis.brandisweb.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.Assert;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 @Configuration
@@ -61,7 +64,13 @@ public class DatabaseInitzr {
             BGame bGame = new BGame();
             bGame.setCompanyName("Brandis");
 
+            bGame = bGameRepository.save(bGame);
+
             bProductBatch.setBGame(bGame);
+
+            bProductPatchService.save(bProductBatch);
+
+            bGame.setProductBatches(Collections.singletonList(bProductBatch));
 
             bGameRepository.save(bGame);
             bSavedProductBatchService.save(bSavedProductBatch);
