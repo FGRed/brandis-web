@@ -28,19 +28,16 @@
         evt.preventDefault();
         $.post("/register/",
             $('#registerForm').serialize(),
-            function(data){});
+            function(data, err){
+                console.log("data:" + data + "err" + err);
+            });
     });
     })
 </script>
 <div class="container">
     <h1>Kirjautuminen</h1>
 <form  id="logInForm" role="form" th:action="@{/login}" th:method="post" style="display: inline">
-    <div th:if="${param.error}">
-        Viallinen käyttäjänimi tai salasana.
-    </div>
-    <div th:if="${param.logout}">
-        Olet kirjautunut ulos.
-    </div>
+    <p style="color: red; display: none" ></p>
     <lable>Email</lable>
     <input class="form-control m-2" type="text" id="username" name="username">
 
@@ -57,7 +54,7 @@
     <input class="form-control m-2" type="password" id="new-password" name="new-password">
 
     <lable>Password again</lable>
-    <input class="form-control m-2" type="password" id="new-password2" name="new-password">
+    <input class="form-control m-2" type="password" id="new-password2" name="new-password2">
     <input class="form-control m-2 btn-primary" type="submit" value="Register">
 </form>
 <input id="switch-btn" class="form-control m-2 btn-primary"  type="button" onclick="switchMode()" value="Register new account.">
