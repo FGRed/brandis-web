@@ -70,7 +70,6 @@ public class DatabaseInitzr {
 
             bProductPatchService.save(bProductBatch);
 
-            bGame.setProductBatches(Collections.singletonList(bProductBatch));
 
             bGameRepository.save(bGame);
             bSavedProductBatchService.save(bSavedProductBatch);
