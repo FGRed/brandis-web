@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/static/static/css",
                         "/static/static/js",
                         "/static/static/media",
+                        "/get-company-name/",
                         "/")
                 .permitAll()
                 .anyRequest().authenticated()
