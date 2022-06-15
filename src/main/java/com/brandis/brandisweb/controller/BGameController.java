@@ -10,6 +10,8 @@ public class BGameController {
     public BGame getBGame(){
         BGame bGame = new BGame();
         bGame.setCompanyName("Bgame from backend Co.");
+        bGame.setBrand(36.6);
+        System.out.println("Loop loop");
         return bGame;
     }
 }
