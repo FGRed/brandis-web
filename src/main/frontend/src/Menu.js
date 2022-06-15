@@ -1,5 +1,4 @@
 import React from "react";
-import Canvas from "./Canvas";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {useState} from 'react';
 
