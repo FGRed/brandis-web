@@ -17,7 +17,6 @@ public class AbstractBGame {
     private double balance;
     @Column(length = 20)
     private String companyName;
-    @Column(length = 20)
-    private String brand;
+    private Double brand;
 
 }
