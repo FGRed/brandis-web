@@ -27,7 +27,7 @@ function CompanyInfo() {
                     </div>
                 </div>
                 <div className="progress ml-auto">
-                    <div className="progress-bar" style={style} role="progressbar" aria-valuenow="75"  aria-valuemin="0"
+                    <div className="progress-bar progress-bar-striped" style={style} role="progressbar" aria-valuenow="75"  aria-valuemin="0"
                          aria-valuemax="100"/>
                 </div>
             </div>

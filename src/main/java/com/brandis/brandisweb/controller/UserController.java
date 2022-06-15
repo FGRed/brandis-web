@@ -19,12 +19,6 @@ import java.util.Objects;
 public class UserController {
     @Autowired
     private BUserService bUserserv;
-
-    @GetMapping("/login/")
-    public String logIn(Model model){
-        return "sign-in";
-    }
-
     @PostMapping(path = "/register/")
     public ResponseEntity<String> register(HttpServletRequest request){
         String email = request.getParameter("new-username");

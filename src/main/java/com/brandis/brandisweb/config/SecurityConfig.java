@@ -37,13 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/static/static/media",
                         "/get-company-name/",
                         "/",
-                        "/get-bgame/")
+                        "/get-bgame/",
+                        "/login")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .disable()
-                .logout()
+                .loginPage("/login")
                 .permitAll()
                 .and()
                 .csrf()

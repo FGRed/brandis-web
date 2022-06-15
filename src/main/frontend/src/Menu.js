@@ -16,11 +16,23 @@ function Menu(){
         </button>
         <Offcanvas show={show} onHide={handleClose}>
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                <Offcanvas.Title>Menu</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                Some text as placeholder. In real life you can have the elements you
-                have chosen. Like, text, images, lists, etc.
+                <ul>
+                    <li>
+                        Item1
+                    </li>
+                    <li>
+                        Item2
+                    </li>
+                    <li>
+                        Item3
+                    </li>
+                    <li>
+                        Item4
+                    </li>
+                </ul>
             </Offcanvas.Body>
         </Offcanvas>
         </div>
