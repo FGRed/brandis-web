@@ -24,19 +24,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/css/**", "/js/**", "/sign-in/**","/h2-console/**", "/register/**")
+                .antMatchers(
+                        "/css/**",
+                        "/js/**",
+                        "/sign-in/**",
+                        "/h2-console/**",
+                        "/register/**",
+                        "/static/**",
+                        "/static/static/**",
+                        "/static/static/css",
+                        "/static/static/js",
+                        "/static/static/media",
+                        "/get-company-name/",
+                        "/",
+                        "/get-bgame/")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
+                .disable()
                 .logout()
                 .permitAll()
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**", "/register/**")
+                .ignoringAntMatchers("/h2-console/**", "/register/**", "/target/classes/static/**", "/", "/get-bgame/")
                 .and()
                 .headers().frameOptions().disable()
                 .and()
