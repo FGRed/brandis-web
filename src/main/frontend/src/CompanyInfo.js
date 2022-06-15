@@ -1,21 +1,21 @@
 import React from "react";
 import "./CompanyInfo.css";
-import ReactDom from "react";
 import axios from "axios";
 
-class CompanyInfo extends React.Component{
-componentDidMount() {
-    axios.get(https://jsonplaceholder.typicode.com/users)
-          .then(res => {
-            const persons = res.data;
-            this.setState({ persons });
-          })
-}
-    return(
+class CompanyInfo extends React.Component {
+    componentDidMount() {
+        axios.get("localhost:8080/get-bgame/")
+            .then(res => {
+                const bgame = res.data;
+                this.setState({bgame});
+            })
+    }
+    render() {
+        return (
             <div className="ml-auto">
                 <div className="row">
                     <div className="col justify-content-start">
-                        <h5 className="text-start">{compName.value}</h5>
+                        <h5 className="text-start">Test</h5>
                     </div>
                 </div>
                 <div className="progress ml-auto">
@@ -24,6 +24,7 @@ componentDidMount() {
                 </div>
             </div>
         );
+    }
 }
 
 export default CompanyInfo
