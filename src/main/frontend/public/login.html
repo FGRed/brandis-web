@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Spring Boot User Authentication</title>
+</head>
+<body>
+
+<script>
+    function switchMode(){
+        console.log("In function");
+        var reg = document.querySelector("#registerForm");
+        var btn = document.querySelector("#switch-btn");
+        var log = document.querySelector("#logInForm");
+        if(reg.style.display == "inline"){
+            reg.style.display = "none";
+            log.style.display = "inline";
+            btn.value = "Register new account.";
+        }else{
+            reg.style.display = "inline";
+            log.style.display = "none";
+            btn.value = "Switch back to log in.";
+        }
+    }
+    $(document).ready(function (){
+    $('#registerForm').submit(function (evt) {
+        evt.preventDefault();
+        $.post("/register/",
+            $('#registerForm').serialize(),
+            function(data){});
+    });
+    })
+</script>
+<div class="container">
+    <h1>Kirjautuminen</h1>
+<form  id="logInForm" role="form" th:action="@{/login}" th:method="post" style="display: inline">
+    <div th:if="${param.error}">
+        Viallinen käyttäjänimi tai salasana.
+    </div>
+    <div th:if="${param.logout}">
+        Olet kirjautunut ulos.
+    </div>
+    <lable>Email</lable>
+    <input class="form-control m-2" type="text" id="username" name="username">
+
+    <lable>Password</lable>
+    <input class="form-control m-2" type="password" id="password" name="password">
+
+    <input class="form-control m-2 btn-primary" type="submit" value="Log in">
+</form>
+<form id="registerForm" style="display: none" th:action="@{/register}" th:method="post">
+    <lable>Email</lable>
+    <input class="form-control m-2" type="text" id="new-username" name="new-username">
+
+    <lable>Password</lable>
+    <input class="form-control m-2" type="password" id="new-password" name="new-password">
+
+    <lable>Password again</lable>
+    <input class="form-control m-2" type="password" id="new-password2" name="new-password">
+    <input class="form-control m-2 btn-primary" type="submit" value="Register">
+</form>
+<input id="switch-btn" class="form-control m-2 btn-primary"  type="button" onclick="switchMode()" value="Register new account.">
+</div>
+</body>
+</html>

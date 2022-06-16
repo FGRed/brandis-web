@@ -2,34 +2,31 @@ import React from "react";
 import "./Navbar.css"
 import Menu from "./Menu";
 import CompanyInfo from "./CompanyInfo";
+import NavLogin from "./NavLogin";
 
 
 class Navbar extends React.Component{
-    render() { return(
-        <header>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-light shadow">
-                <div className="navbar-brand flex-grow-1 d-flex">
-                    <Menu/>
-                </div>
-                <div className="flex-grow-1 d-flex">
-                    <div className="flex-nowrap bg-light mx-0 mx-lg-auto rounded p-1">
-                        <CompanyInfo/>
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() { return (
+        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
+            <div className="container-fluid">
+                <Menu userLoggedIn={this.props.userLoggedIn}/>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
+                        <li className="nav-item">
+                            <CompanyInfo userLoggedIn={this.props.userLoggedIn}/>
+                        </li>
+                    </ul>
+                    <div className="d-flex">
+                        <NavLogin userLoggedIn={this.props.userLoggedIn}/>
                     </div>
                 </div>
-                <button className="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav ml-auto">
-                        <a className="nav-item nav-link" href="#">Twitter</a>
-                        <a className="nav-item nav-link" href="#">Resume</a>
-                        <a className="nav-item nav-link" href="#">Blog</a>
-                    </div>
-                </div>
-            </nav>
-        </header>
+            </div>
+        </nav>
     )
     }
 }
