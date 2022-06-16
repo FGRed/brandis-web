@@ -1,5 +1,6 @@
 package com.brandis.brandisweb.controller;
 
+import com.brandis.brandisweb.service.AuthorityService;
 import com.brandis.brandisweb.service.CurrentUserService;
 import com.brandis.brandisweb.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,15 @@ public class IndexController {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private AuthorityService authorityService;
+
     @RequestMapping("/")
     public String LogIn(Model model) throws IOException {
         model.addAttribute("userLoggedIn", currentUserService.getUser() != null);
         model.addAttribute("version", "Brandis Web " + projectService.getProjectVersion());
         model.addAttribute("fmode", Boolean.TRUE);
+
         return "index";
     }
 }

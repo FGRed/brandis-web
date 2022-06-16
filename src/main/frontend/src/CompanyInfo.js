@@ -20,10 +20,11 @@ function CompanyInfo(props) {
                 setBgame(response.data)
                 let percent = response.data.brand + "%"
                 setStyle({width: percent})
+
             }).catch(reason => {
                 let fmode = document.querySelector("#fmode").value;
                 if(!fmode){
-                    setBgame({companyName: "Placeholder"})
+                    setBgame({companyName: "Placeholder", brand: 25.0})
                     setStyle({width: "12%"})
                 }
             });
@@ -32,15 +33,15 @@ function CompanyInfo(props) {
     if(!bgame) return null;
 
         return (
-            <div className="ml-auto w-100">
+            <div className="ml-auto w-100 ps-2" hidden={bgame.companyName === ""}>
                 <div className="row">
                     <div className="col justify-content-start">
                         <h5 className={"text-start " + textColor}>{bgame.companyName}</h5>
                     </div>
                 </div>
-                <div className="progress ml-auto" style={{height: "10px"}}>
+                <div className="progress ml-auto" style={{height: "12px"}}>
                     <div className="progress-bar progress-bar-striped" style={style} role="progressbar" aria-valuenow="75"  aria-valuemin="0"
-                         aria-valuemax="100"/>
+                         aria-valuemax="100">{bgame.brand + "%"}</div>
                 </div>
             </div>
         );
