@@ -2,10 +2,12 @@ import React from "react";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {useState} from 'react';
 import "./Menu.css"
+import NewGameForm from "./NewGameForm"
 
 function Menu(props){
 
     const [show, setShow] = useState(false);
+    const [modalShow, setModalShow] = React.useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -47,7 +49,7 @@ function Menu(props){
                         <a href="#" className="list-group-item">Save Game</a>
                     </li>
                     <li>
-                        <a href="#" className="list-group-item">New Game</a>
+                        <a href="#" className="list-group-item" onClick={() => setModalShow(true)}>New Game</a>
                     </li>
                     <li>
                         <a href="#" className="list-group-item">Settings</a>
@@ -55,6 +57,10 @@ function Menu(props){
                 </ul>
             </Offcanvas.Body>
         </Offcanvas>
+        <NewGameForm
+            show={modalShow}
+            onHide={()=> setModalShow(false)}
+        />
         </div>
     );
 }

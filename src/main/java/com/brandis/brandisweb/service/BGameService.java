@@ -2,6 +2,7 @@ package com.brandis.brandisweb.service;
 
 import com.brandis.brandisweb.exception.GameException;
 import com.brandis.brandisweb.model.bgame.BGame;
+import com.brandis.brandisweb.model.buser.BUser;
 import com.brandis.brandisweb.repository.BGameRepository;
 import com.brandis.brandisweb.repository.BSavedGameRepository;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,8 @@ public class BGameService implements BaseService<BGame> {
 
     private final BGameRepository bGameRepository;
     private final BSavedGameRepository bSavedGameRepository;
+    private final CurrentUserService currentUserService;
+    private final BUserService bUserService;
 
     @Override
     public List<BGame> findAll() {
@@ -54,7 +57,13 @@ public class BGameService implements BaseService<BGame> {
         return bGameRepository.count();
     }
 
-    /*public Object rollMonth(BGame game){
-
-    }*/
+    public BGame createNew(String companyName){
+        BGame bGame = new BGame();
+        bGame.setCompanyName(companyName);
+        bGame.setBrand(0.0);
+        bGame = bGameRepository.save(bGame);
+        BUser currentUser = currentUserService.getUser();
+        currentUser.getBgames().add(bGame);
+        return bGame;
+    }
 }

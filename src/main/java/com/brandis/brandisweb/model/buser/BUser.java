@@ -1,5 +1,6 @@
 package com.brandis.brandisweb.model.buser;
 
+import com.brandis.brandisweb.model.bgame.BGame;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,9 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 @Getter
 @Setter
@@ -65,4 +64,10 @@ public class BUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    public List<BGame> bgames = new ArrayList<>();
 }

@@ -7,6 +7,7 @@ import com.brandis.brandisweb.model.bproductbatch.BSavedProductBatch;
 import com.brandis.brandisweb.model.buser.BUser;
 import com.brandis.brandisweb.repository.BGameRepository;
 import com.brandis.brandisweb.repository.BProductRepository;
+import com.brandis.brandisweb.service.AuthorityService;
 import com.brandis.brandisweb.service.BProductPatchService;
 import com.brandis.brandisweb.service.BSavedProductBatchService;
 import com.brandis.brandisweb.service.BUserService;
@@ -39,7 +40,6 @@ public class DatabaseInitzr {
     @Autowired
     private BGameRepository bGameRepository;
 
-
     @Bean
     CommandLineRunner initDatabase1(){
 
@@ -63,6 +63,7 @@ public class DatabaseInitzr {
 
             BGame bGame = new BGame();
             bGame.setCompanyName("Brandis");
+            bGame.setBrand(70.0);
 
             bGame = bGameRepository.save(bGame);
 
@@ -70,9 +71,11 @@ public class DatabaseInitzr {
 
             bProductPatchService.save(bProductBatch);
 
-
             bGameRepository.save(bGame);
             bSavedProductBatchService.save(bSavedProductBatch);
+
+            /*user0.getBgames().add(bGame);
+            bUserService.save(user0);*/
         };
     }
 }

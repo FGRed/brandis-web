@@ -38,7 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/get-company-name/",
                         "/",
                         "/get-bgame/",
-                        "/login")
+                        "/login",
+                        "/module-login/",
+                        "/create-new-game/")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -47,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**", "/register/**", "/target/classes/static/**", "/", "/get-bgame/")
+                .ignoringAntMatchers("/h2-console/**", "/register/**", "/target/classes/static/**", "/", "/get-bgame/", "/module-login/","/create-new-game/")
                 .and()
                 .headers().frameOptions().disable()
                 .and()
