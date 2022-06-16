@@ -6,7 +6,7 @@ function App() {
   let userLoggedIn = document.querySelector("#userLoggedIn").value;
 
   return (
-        <Navbar/>
+        <Navbar userLoggedIn = {userLoggedIn}/>
   );
 }
 

@@ -19,11 +19,11 @@ public class BGameController {
 
         BGame bGame = new BGame();
         if(currentUserService.getUser() != null) {
-            bGame.setCompanyName("Bgame from backend Co.");
+            bGame.setCompanyName("Test Corporation Group Co.");
             bGame.setBrand(36.6);
 
         }else {
-            bGame.setCompanyName("User not logged in!");
+            bGame.setCompanyName("Company name Co.");
             bGame.setBrand(0.0);
         }
 

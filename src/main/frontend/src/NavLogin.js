@@ -7,13 +7,16 @@ export default function NavLogin(props){
     }
 
     let btnText = ''
-    if(props.userLoggedIn === true){
+    if(props.userLoggedIn === 'true'){
         btnText = 'Log out'
     }else {
         btnText = 'Log in'
     }
     return (
-            <input type="submit" className="btn btn-primary" value={btnText} onClick={redirectToLoginPage}/>
+        <button className="btn btn-primary" onClick={redirectToLoginPage}>
+            {btnText}
+            <i className="fas fa-sign-in-alt ms-2"></i>
+        </button>
     )
 }
 

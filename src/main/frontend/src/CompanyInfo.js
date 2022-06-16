@@ -4,7 +4,13 @@ import axios from "axios";
 import {useEffect} from "react";
 import {useState} from "react";
 
-function CompanyInfo() {
+function CompanyInfo(props) {
+
+    let textColor = '';
+
+    if(props.userLoggedIn === 'false'){
+        textColor = 'text-muted'
+    }
 
     const [bgame, setBgame] = useState(null)
     const [style, setStyle] = useState(null)
@@ -23,7 +29,7 @@ function CompanyInfo() {
             <div className="ml-auto">
                 <div className="row">
                     <div className="col justify-content-start">
-                        <h5 className="text-start">{bgame.companyName}</h5>
+                        <h5 className={"text-start " + textColor}>{bgame.companyName}</h5>
                     </div>
                 </div>
                 <div className="progress ml-auto">
