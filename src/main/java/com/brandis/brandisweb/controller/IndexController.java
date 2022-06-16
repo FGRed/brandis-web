@@ -22,6 +22,7 @@ public class IndexController {
     public String LogIn(Model model) throws IOException {
         model.addAttribute("userLoggedIn", currentUserService.getUser() != null);
         model.addAttribute("version", "Brandis Web " + projectService.getProjectVersion());
+        model.addAttribute("fmode", Boolean.TRUE);
         return "index";
     }
 }

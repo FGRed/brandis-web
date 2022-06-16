@@ -4,3 +4,6 @@ a:link {
 ul {
     list-style-type: none;
 }
+.menu--container{
+    max-height: 48px;
+}

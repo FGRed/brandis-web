@@ -12,18 +12,17 @@ class Navbar extends React.Component{
     }
 
     render() { return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
-            <div className="container-fluid">
+        <nav className="navbar navbar-expand navbar-light bg-light shadow mx-2" id="b--navbar">
+            <div className="d-flex w-100">
                 <Menu userLoggedIn={this.props.userLoggedIn}/>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
-                        <li className="nav-item">
+                <div className="navbar-collapse">
+                    <div className="navbar-nav mx-auto justify-content-center w-75">
                             <CompanyInfo userLoggedIn={this.props.userLoggedIn}/>
-                        </li>
-                    </ul>
-                    <div className="d-flex">
+                    </div>
+                    <div className="nav-login">
                         <NavLogin userLoggedIn={this.props.userLoggedIn}/>
                     </div>
+
                 </div>
             </div>
         </nav>
