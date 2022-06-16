@@ -7,3 +7,15 @@
 #navcol-1 {
     font-size: 18px;
 }
+#b--navbar {
+    max-height: 64px;
+}
+.nav-login{
+
+}
+
+@media only screen and (max-width: 992px) {
+    /*.nav-login{
+        display: none;
+    }*/
+}

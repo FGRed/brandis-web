@@ -13,10 +13,12 @@ export default function NavLogin(props){
         btnText = 'Log in'
     }
     return (
-        <button className="btn btn-primary" onClick={redirectToLoginPage}>
-            {btnText}
-            <i className="fas fa-sign-in-alt ms-2"></i>
-        </button>
+        <div>
+            <button className="btn btn-primary" onClick={redirectToLoginPage}>
+                {btnText}
+                <i className="fas fa-sign-in-alt ms-2"></i>
+            </button>
+        </div>
     )
 }
 

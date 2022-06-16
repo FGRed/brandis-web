@@ -10,7 +10,7 @@ function Menu(props){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
      return(
-        <div>
+        <div className="menu--container">
         <button className="btn btn-outline-primary btn-lg" onClick={handleShow} disabled={props.userLoggedIn === "false"}>
             <i className="fa fa-solid fa-bars"/>
         </button>
