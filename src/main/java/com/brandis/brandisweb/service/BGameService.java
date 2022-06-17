@@ -64,16 +64,16 @@ public class BGameService implements BaseService<BGame> {
         double balance = 0.0;
         double brand = 0.0;
         if(difficulty == Difficulty.EASY){
-            balance = 10000000.0;
+            balance = 10000.0;
             brand = 30.0;
         }else if(difficulty == Difficulty.NORMAL){
-            balance = 500000.0;
+            balance = 5000.0;
             brand = 20.0;
         }else if(difficulty == Difficulty.HARD){
-            balance = 250000.0;
+            balance = 2500.0;
             brand = 10.0;
         }else if(difficulty == Difficulty.VERY_HARD){
-            balance = 125000.0;
+            balance = 100.0;
             brand = 0.0;
         }
 
