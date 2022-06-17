@@ -22,37 +22,37 @@ function Menu(props){
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <h6 className="mb-2">Company</h6>
-                <ul className="list-group mb-3">
+                <ul>
                     <li>
-                        <a href="#" className="list-group-item">Monthly Investment Accumulation</a>
+                        <a href="#">Monthly Investment Accumulation</a>
                     </li>
                     <li>
-                        <a href="#" className="list-group-item">Annual Investment Accumulation</a>
+                        <a href="#">Annual Investment Accumulation</a>
                     </li>
 
                     <li>
-                        <a href="#" className="list-group-item">Bank</a>
+                        <a href="#">Bank</a>
                     </li>
                     <li>
-                        <a href="#" className="list-group-item">Charity</a>
+                        <a href="#">Charity</a>
                     </li>
                     <li>
-                        <a href="#" className="list-group-item">Stats</a>
+                        <a href="#">Stats</a>
                     </li>
                 </ul>
                 <h6 className="mb-2">Game</h6>
-                <ul className="list-group">
+                <ul>
                     <li>
-                        <a href="#" className="list-group-item">Load Game</a>
+                        <a href="#">Load Game</a>
                     </li>
                     <li>
-                        <a href="#" className="list-group-item">Save Game</a>
+                        <a href="#">Save Game</a>
                     </li>
                     <li>
-                        <a href="#" className="list-group-item" onClick={() => setModalShow(true)}>New Game</a>
+                        <a href="#" onClick={() => setModalShow(true)}>New Game</a>
                     </li>
                     <li>
-                        <a href="#" className="list-group-item">Settings</a>
+                        <a href="#">Settings</a>
                     </li>
                 </ul>
             </Offcanvas.Body>

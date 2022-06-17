@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -49,8 +50,8 @@ public class BGameController {
     }
 
     @PostMapping(path = "/create-new-game/")
-    public String newGame(@RequestParam("companyName") final String companyName){
-        bGameService.createNew(companyName);
+    public String newGame(@RequestParam("companyName") final String companyName, @RequestParam("difficulty") List<String> difficulty){
+        bGameService.createNew(companyName, difficulty);
         return "redirect:/";
     }
 

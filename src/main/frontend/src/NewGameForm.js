@@ -12,22 +12,28 @@ export default function NewGameForm(props){
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Modal heading
+                    New Game
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>New Game</h4>
                 <Form
                     method="post"
                     action="/create-new-game/"
                 >
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="formBasicCompanyName">
                         <Form.Label>Company name</Form.Label>
                         <Form.Control name="companyName" type="text" placeholder="Enter company name" />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+                    <Form.Group>
+                        <Form.Label className="mb-2">Difficulty</Form.Label>
+                        <div className="mb-3">
+                            <Form.Check inline name="difficulty" className="my-3" type="radio" label="Easy" id="easy" value="easy"/>
+                            <Form.Check inline name="difficulty" className="my-3" type="radio" label="Normal" id="normal" value="normal"/>
+                            <Form.Check inline name="difficulty" className="my-3" type="radio" label="Hard" id="hard" value="hard"/>
+                            <Form.Check inline name="difficulty" className="my-3" type="radio" label="Really hard" id="really-hard" value="very_hard"/>
+                        </div>
+                    </Form.Group>
+                    <Button type="submit">Create game</Button>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
