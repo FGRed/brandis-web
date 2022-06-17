@@ -1,13 +1,13 @@
 package com.brandis.brandisweb.model.bgame;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @MappedSuperclass
 @Getter
 @Setter
+@AllArgsConstructor
 public class AbstractBGame {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,4 +19,7 @@ public class AbstractBGame {
     private String companyName;
     private Double brand;
 
+    public AbstractBGame(){
+
+    }
 }
