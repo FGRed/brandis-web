@@ -1,16 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import {useState} from 'react';
 import "./Menu.css"
 import NewGameForm from "./NewGameForm"
-import LoginModal from "./LoginModal";
-import registerModal from "./RegisterModal";
 
 function Menu(props){
 
-    const [show, setShow] = useState(false);
+    const [showMenu, setShow] = useState(false);
     const [modalShow, setModalShow] = React.useState(false);
-    const [logoutModalShow, setLogoutModalShow] = React.useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -19,7 +15,7 @@ function Menu(props){
         <button className="btn btn-outline-primary btn-lg" onClick={handleShow} disabled={props.userLoggedIn === "false"}>
             <i className="fa fa-solid fa-bars"/>
         </button>
-        <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas show={showMenu} onHide={handleClose}>
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title >Main Menu<i className="fa fa-solid fa-bars ms-2"/></Offcanvas.Title>
             </Offcanvas.Header>
@@ -57,20 +53,6 @@ function Menu(props){
                     <li>
                         <a href="#">Settings</a>
                     </li>
-                </ul>
-                <h6 className="mb-2">Account</h6>
-                <ul>
-                    <li>
-                        <a href="#">Account settings</a>
-                    </li>
-                    <li>
-                        <a href="#" onClick={()=>setLogoutModalShow(true)}>Logout</a>
-                    </li>
-                    <LoginModal
-                        show={logoutModalShow}
-                        onHide={()=> setLogoutModalShow(false)}
-                        userLoggedIn = {true}
-                    />
                 </ul>
             </Offcanvas.Body>
             <div className="row w-100" >
