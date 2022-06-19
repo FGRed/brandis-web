@@ -3,11 +3,14 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import {useState} from 'react';
 import "./Menu.css"
 import NewGameForm from "./NewGameForm"
+import LoginModal from "./LoginModal";
+import registerModal from "./RegisterModal";
 
 function Menu(props){
 
     const [show, setShow] = useState(false);
     const [modalShow, setModalShow] = React.useState(false);
+    const [logoutModalShow, setLogoutModalShow] = React.useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -55,7 +58,32 @@ function Menu(props){
                         <a href="#">Settings</a>
                     </li>
                 </ul>
+                <h6 className="mb-2">Account</h6>
+                <ul>
+                    <li>
+                        <a href="#">Account settings</a>
+                    </li>
+                    <li>
+                        <a href="#" onClick={()=>setLogoutModalShow(true)}>Logout</a>
+                    </li>
+                    <LoginModal
+                        show={logoutModalShow}
+                        onHide={()=> setLogoutModalShow(false)}
+                        userLoggedIn = {true}
+                    />
+                </ul>
             </Offcanvas.Body>
+            <div className="row w-100" >
+                <div className="col justify-content-end">
+                    <small>Logged in user: {document.querySelector("#username").value}</small>
+                </div>
+
+            </div>
+            <div className="row w-100">
+                <div className="col justify-content-end">
+                    <small>Version: {document.querySelector("#version").value}</small>
+                </div>
+            </div>
         </Offcanvas>
         <NewGameForm
             show={modalShow}

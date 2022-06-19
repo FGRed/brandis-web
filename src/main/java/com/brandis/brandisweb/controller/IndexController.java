@@ -1,5 +1,6 @@
 package com.brandis.brandisweb.controller;
 
+import com.brandis.brandisweb.model.buser.BUser;
 import com.brandis.brandisweb.service.AuthorityService;
 import com.brandis.brandisweb.service.CurrentUserService;
 import com.brandis.brandisweb.service.ProjectService;
@@ -27,6 +28,10 @@ public class IndexController {
         model.addAttribute("userLoggedIn", currentUserService.getUser() != null);
         model.addAttribute("version", "Brandis Web " + projectService.getProjectVersion());
         model.addAttribute("fmode", Boolean.TRUE);
+        BUser bUser = currentUserService.getUser();
+        if(bUser != null) {
+            model.addAttribute("username", currentUserService.getUser().getUsername());
+        }
 
         return "index";
     }

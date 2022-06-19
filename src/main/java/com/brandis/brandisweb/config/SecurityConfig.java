@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/sign-in/**",
                         "/h2-console/**",
                         "/register/**",
+                        "/register/",
                         "/static/**",
                         "/static/static/**",
                         "/static/static/css",
@@ -40,16 +41,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/get-bgame/",
                         "/login",
                         "/module-login/",
-                        "/create-new-game/")
+                        "/create-new-game/",
+                        "/module-logout/",
+                        "/webjars/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
                 .permitAll()
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**", "/register/**", "/target/classes/static/**", "/", "/get-bgame/", "/module-login/","/create-new-game/")
+                .ignoringAntMatchers("/h2-console/**", "/register/**", "/register/","/target/classes/static/**", "/", "/get-bgame/", "/module-login/","/create-new-game/", "/module-logout/")
                 .and()
                 .headers().frameOptions().disable()
                 .and()

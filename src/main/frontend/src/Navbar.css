@@ -10,12 +10,12 @@
 #b--navbar {
     max-height: 64px;
 }
-.nav-login{
-
+.navbar{
+    min-width: 100px;
 }
 
-@media only screen and (max-width: 992px) {
-    /*.nav-login{
-        display: none;
-    }*/
+@media only screen and (max-width: 670px) {
+    .nav-login{
+        margin-right: 17px;
+    }
 }
