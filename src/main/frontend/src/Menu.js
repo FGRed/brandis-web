@@ -1,16 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import {useState} from 'react';
 import "./Menu.css"
 import NewGameForm from "./NewGameForm"
-import LoginModal from "./LoginModal";
-import registerModal from "./RegisterModal";
 
 function Menu(props){
 
     const [showMenu, setShow] = useState(false);
     const [modalShow, setModalShow] = React.useState(false);
-    const [logoutModalShow, setLogoutModalShow] = React.useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

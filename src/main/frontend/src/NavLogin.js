@@ -44,7 +44,7 @@ export default function NavLogin(props){
                     <button className="btn btn-primary btn-circle ms-2" onClick={handleShow} disabled={props.userLoggedIn === "false"}><i className="fas fa-u" ></i></button>
                     <Offcanvas placement="end" show={showMenu} onHide={handleClose}>
                                 <Offcanvas.Header closeButton>
-                                    <Offcanvas.Title >{document.querySelector("#username").value}<i className="fa fa-solid fa-bars ms-2"/></Offcanvas.Title>
+                                    <Offcanvas.Title >{document.querySelector("#username").value}<i className="fas fa-u ms-2"/></Offcanvas.Title>
                                 </Offcanvas.Header>
                                 <Offcanvas.Body>
                                     <h6 className="mb-2">Account</h6>
