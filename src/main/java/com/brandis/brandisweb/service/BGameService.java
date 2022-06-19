@@ -18,9 +18,7 @@ import java.util.Optional;
 public class BGameService implements BaseService<BGame> {
 
     private final BGameRepository bGameRepository;
-    private final BSavedGameRepository bSavedGameRepository;
     private final CurrentUserService currentUserService;
-    private final BUserService bUserService;
 
     @Override
     public List<BGame> findAll() {

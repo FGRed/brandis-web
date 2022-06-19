@@ -12,7 +12,7 @@ class Navbar extends React.Component{
     }
 
     render() { return (
-        <nav className="navbar navbar-expand navbar-light bg-light shadow mx-2" id="b--navbar">
+        <nav className="navbar navbar-expand navbar-light bg-light shadow px-2" id="b--navbar">
             <div className="d-flex w-100">
                 <Menu userLoggedIn={this.props.userLoggedIn}/>
                 <div className="navbar-collapse">
