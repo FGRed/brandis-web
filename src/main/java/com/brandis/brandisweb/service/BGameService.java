@@ -3,6 +3,7 @@ package com.brandis.brandisweb.service;
 import com.brandis.brandisweb.enums.Difficulty;
 import com.brandis.brandisweb.exception.GameException;
 import com.brandis.brandisweb.model.bgame.BGame;
+import com.brandis.brandisweb.model.bgame.BSavedGame;
 import com.brandis.brandisweb.model.buser.BUser;
 import com.brandis.brandisweb.repository.BGameRepository;
 import com.brandis.brandisweb.repository.BSavedGameRepository;
@@ -18,6 +19,8 @@ import java.util.Optional;
 public class BGameService implements BaseService<BGame> {
 
     private final BGameRepository bGameRepository;
+
+    private final BSavedGameService bSavedGameService;
     private final CurrentUserService currentUserService;
 
     @Override
@@ -75,12 +78,19 @@ public class BGameService implements BaseService<BGame> {
             brand = 0.0;
         }
 
+        BSavedGame bSavedGame = new BSavedGame();
+        bSavedGame.setUserFunds(balance);
+        bSavedGame.setCompanyName(companyName);
+        bSavedGame.setBrand(brand);
+        bSavedGameService.save(bSavedGame);
+
         BGame bGame = BGame
                 .builder()
                 .balance(balance)
                 .companyName(companyName)
                 .brand(brand)
                 .build();
+        bGame.getSaves().add(bSavedGame);
 
         bGame = bGameRepository.save(bGame);
         BUser currentUser = currentUserService.getUser();
