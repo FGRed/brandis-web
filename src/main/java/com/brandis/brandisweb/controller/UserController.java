@@ -6,6 +6,7 @@ import com.brandis.brandisweb.service.BUserService;
 import com.brandis.brandisweb.service.CurrentUserService;
 import com.brandis.brandisweb.service.ProjectService;
 import com.brandis.brandisweb.util.PasswordUtil;
+import com.jcabi.aspects.Loggable;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,7 @@ public class UserController {
     private CurrentUserService currentUserService;
 
     @PostMapping(path = "/register/")
+    @Loggable
     public String register(HttpServletRequest request){
         String email = request.getParameter("new-username");
         String pass = request.getParameter("new-password");
@@ -52,6 +54,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/module-login/")
+    @Loggable
     public String moduleLogin(@RequestParam("username") final String username,
                         @RequestParam("password") final String password, Model model){
         model.addAttribute("userLoggedIn", true);
@@ -70,6 +73,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/module-logout/")
+    @Loggable
     public String moduleLogout(HttpServletRequest request, HttpServletResponse response){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
