@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,11 +65,13 @@ public class BGameService implements BaseService<BGame> {
         Difficulty difficulty = Difficulty.valueOf(difficulties.get(0).toUpperCase());
         double balance = 0.0;
         double brand = 0.0;
+        double loan = 100.0;
         if(difficulty == Difficulty.EASY){
-            balance = 10000.0;
+            balance = 1000000000.0;
             brand = 30.0;
         }else if(difficulty == Difficulty.NORMAL){
             balance = 5000.0;
+            loan = 100.0;
             brand = 20.0;
         }else if(difficulty == Difficulty.HARD){
             balance = 2500.0;
@@ -80,21 +83,24 @@ public class BGameService implements BaseService<BGame> {
 
         BSavedGame bSavedGame = new BSavedGame();
         bSavedGame.setUserFunds(balance);
-        bSavedGame.setCompanyName(companyName);
         bSavedGame.setBrand(brand);
-        bSavedGameService.save(bSavedGame);
+        bSavedGame.setLoanFunds(loan);
+        bSavedGame.setCompanyFunds(0.0);
+        bSavedGame = bSavedGameService.save(bSavedGame);
 
         BGame bGame = BGame
                 .builder()
-                .balance(balance)
+                .originalBalance(balance)
                 .companyName(companyName)
-                .brand(brand)
                 .build();
-        bGame.getSaves().add(bSavedGame);
 
         bGame = bGameRepository.save(bGame);
+        bGame.setSaves(Collections.singletonList(bSavedGame));
         BUser currentUser = currentUserService.getUser();
         currentUser.getBgames().add(bGame);
         return bGame;
     }
+
+
+
 }

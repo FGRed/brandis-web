@@ -1,15 +1,15 @@
 package com.brandis.brandisweb.controller;
 
+import com.brandis.brandisweb.dto.GameDTO;
 import com.brandis.brandisweb.model.bgame.BGame;
+import com.brandis.brandisweb.model.bgame.BSavedGame;
 import com.brandis.brandisweb.model.buser.BUser;
 import com.brandis.brandisweb.service.BGameService;
+import com.brandis.brandisweb.service.BSavedGameService;
 import com.brandis.brandisweb.service.CurrentUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,9 +24,14 @@ public class BGameController {
     @Autowired
     private BGameService bGameService;
 
+    @Autowired
+    private BSavedGameService bSavedGameService;
+
     @GetMapping(path = "/get-bgame/")
     @ResponseBody
-    public BGame getBGame(){
+    public GameDTO getBGame(){
+
+        GameDTO gameDTO = new GameDTO();
 
         BGame bGame = new BGame();
         BUser currUser = currentUserService.getUser();
@@ -35,18 +40,21 @@ public class BGameController {
             List<BGame> games = currUser.getBgames();
             if(games.isEmpty()){
                 bGame.setCompanyName("");
-                bGame.setBrand(0.0);
             }else {
                 bGame = games.get(games.size()-1);
             }
 
-
+            List<BSavedGame> bSavedGames = bGame.getSaves();
+            if(!bSavedGames.isEmpty()) {
+                gameDTO.setBSavedGame(bSavedGames.get(bSavedGames.size() - 1));
+            }
         }else {
             bGame.setCompanyName("");
-            bGame.setBrand(0.0);
         }
 
-        return bGame;
+        gameDTO.setBGame(bGame);
+
+        return gameDTO;
     }
 
     @PostMapping(path = "/create-new-game/")
@@ -54,5 +62,7 @@ public class BGameController {
         bGameService.createNew(companyName, difficulty);
         return "redirect:/";
     }
+
+
 
 }

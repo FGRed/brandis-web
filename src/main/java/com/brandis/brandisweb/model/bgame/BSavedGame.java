@@ -14,5 +14,10 @@ public class BSavedGame extends AbstractBGame {
     private Double userFunds;
     @Column(scale = 2)
     private Double companyFunds;
+    @Column(scale = 2)
+    private Double loanFunds;
+    @Column(scale = 2)
+    private Double brand;
+    private Boolean currentSave;
 
 }

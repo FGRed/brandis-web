@@ -4,45 +4,104 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import "./FinancesInfo.css";
+import axios from "axios";
+import TransferModal from "./TransferModal";
+import LoanModal from "./LoanModal";
 
 export default function FinancesInfo(props) {
 
+    const[gameDTO, setGameDTO] = React.useState(false);
+    const[show, setShow] = React.useState(false);
+    const[show2, setShow2] = React.useState(false);
+    const[show3, setShow3] = React.useState(false);
+
+    React.useEffect(() => {
+        getData()
+    }, [])
+
+    const getData=()=>{
+        axios.get("/get-bgame/").then((response) => {
+            setGameDTO(response.data)
+        })
+    }
+
+    const changeState=()=>{
+        getData()
+    }
+    if(!gameDTO) return null;
     return (
-        <section className="w-100 mt-4 shadow border p-3 rounded-3">
-        <Row className="g-0 mb-2">
-            <Col className="col-auto p-1 col-sm-2 finances-input-title">
-                <h6 className="align-middle">Your Funds</h6>
-            </Col>
-            <Col className="border border-secondary p-1 col-lg-8">
-                <Form.Text className="align-middle" id="finances">100000€</Form.Text>
-            </Col>
-            <Col className="ms-2 finances-btn">
-                <Button variant="outline-primary w-100">Paycheck time</Button>
-            </Col>
-        </Row>
-        <Row className="g-0 mb-2">
-            <Col className="col-auto p-1 col-sm-2 finances-input-title">
-                <h6  className="align-middle">Company Funds</h6>
-            </Col>
-            <Col className="border border-secondary p-1 col-lg-8">
-                <Form.Text className="align-middle" id="funds">100000€</Form.Text>
-            </Col>
-            <Col className="ms-2 finances-btn">
-                <Button variant="outline-primary w-100">Transfer funds</Button>
-            </Col>
-        </Row>
-            <Row className="g-0">
-                <Col className="col-auto p-1 col-sm-2 finances-input-title">
-                    <h6 className="align-middle">Loan</h6>
-                </Col>
-                <Col className="border border-secondary p-1 col-lg-8">
-                    <Form.Text className="align-middle" id="loan">5000000000€</Form.Text>
-                </Col>
-                <Col className="ms-2 finances-btn">
-                    <Button variant="outline-primary w-100">Manage loan</Button>
-                </Col>
-            </Row>
-        </section>
+        <>{gameDTO.bsavedGame !== null &&
+            <section className="w-100 mt-4 shadow  p-3 rounded-3">
+
+                <Row className="g-0 mb-2">
+                    <Col className="col-auto p-1 col-sm-2 finances-input-title rounded-2">
+                        <h6 className="align-middle">Your Funds</h6>
+                    </Col>
+                    <Col className="p-1 col-lg-9 finances-input">
+                        <Form.Text className="align-middle" id="finances">{gameDTO.bsavedGame.userFunds},-
+                            <i className="fa fa-hand-holding-dollar mt-1-5" style={{float:"right"}}></i>
+                        </Form.Text>
+                    </Col>
+                    <Col className="ms-2 finances-btn">
+                        <Button variant="outline-primary w-100 align-middle" onClick={()=>setShow(true)}><i
+                            className="fa-solid fa-money-bill-transfer"></i></Button>
+                    </Col>
+                </Row>
+                <Row className="g-0 mb-2">
+                    <Col className="col-auto p-1 col-sm-2 finances-input-title rounded-2">
+                        <h6 className="align-middle company-funds">Company Funds</h6>
+                    </Col>
+                    <Col className="p-1 col-lg-9 finances-input">
+                        <Form.Text className="align-middle" id="funds">{gameDTO.bsavedGame.companyFunds},-
+                            <i className="fa fa-sack-dollar mt-1-5" style={{float:"right"}}></i>
+                        </Form.Text>
+                    </Col>
+                    <Col className="ms-2 finances-btn">
+                        <Button variant="outline-primary w-100 align-middle" onClick={()=>setShow2(true)}><i className="fa-solid fa-money-bill-transfer"></i></Button>
+                    </Col>
+                </Row>
+                <Row className="g-0">
+                    <Col className="col-auto p-1 col-sm-2 finances-input-title rounded-2">
+                        <h6 className="align-middle">Loan</h6>
+                    </Col>
+                    <Col className="p-1 col-lg-9 finances-input">
+                        <Form.Text className="align-middle" id="loan">{gameDTO.bsavedGame.loanFunds},-
+                            <i className="fa fa-money-check-alt mt-1-5" style={{float:"right"}}></i>
+                        </Form.Text>
+                    </Col>
+                    <Col className="ms-2 finances-btn">
+                        <Button variant="outline-primary w-100 align-middle" onClick={()=>setShow3(true)}><i className="fa-solid fa-money-bill-transfer"></i></Button>
+                    </Col>
+                </Row>
+                <TransferModal
+                    show={show}
+                    onHide={()=>setShow(false)}
+                    funds={gameDTO.bsavedGame.userFunds}
+                    companyFunds={gameDTO.bsavedGame.companyFunds}
+                    from="Your Funds"
+                    to="Company Funds"
+                    changeState={()=>changeState()}
+                    method="userFundsToCompany"
+                />
+                <TransferModal
+                    show={show2}
+                    onHide={()=>setShow2(false)}
+                    funds={gameDTO.bsavedGame.companyFunds}
+                    companyFunds={gameDTO.bsavedGame.userFunds}
+                    from="Company Funds"
+                    to="Your Funds"
+                    method="companyFundsToYou"
+                    changeState={()=>changeState()}
+                />
+                <LoanModal
+                    show={show3}
+                    onHide={()=>setShow3(false)}
+                    funds={gameDTO.bsavedGame.companyFunds}
+                    loan={gameDTO.bsavedGame.loanFunds}
+                    changeState={()=>changeState()}
+                />
+            </section>
+        }</>
     )
 }
 
