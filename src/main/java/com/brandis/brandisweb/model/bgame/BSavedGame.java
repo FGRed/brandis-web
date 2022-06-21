@@ -1,9 +1,23 @@
 package com.brandis.brandisweb.model.bgame;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Table(name = "Saved_BGame")
 @Entity
+@Getter
+@Setter
 public class BSavedGame extends AbstractBGame {
+    @Column(scale = 2)
+    private Double userFunds;
+    @Column(scale = 2)
+    private Double companyFunds;
+    @Column(scale = 2)
+    private Double loanFunds;
+    @Column(scale = 2)
+    private Double brand;
+    private Boolean currentSave;
+
 }

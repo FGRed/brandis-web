@@ -10,6 +10,7 @@ function App() {
       <>
         <Navbar userLoggedIn = {userLoggedIn}/>
         <div className="container">
+
             <FinancesInfo/>
         </div>
       </>

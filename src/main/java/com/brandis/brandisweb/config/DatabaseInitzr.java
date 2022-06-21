@@ -63,7 +63,6 @@ public class DatabaseInitzr {
 
             BGame bGame = new BGame();
             bGame.setCompanyName("Brandis");
-            bGame.setBrand(70.0);
 
             bGame = bGameRepository.save(bGame);
 

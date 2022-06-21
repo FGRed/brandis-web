@@ -1,9 +1,22 @@
+.finances-input{
+    border: 1px solid #242424;
+    border-radius: 5px;
+}
+
+
 @media only screen and (max-width: 991px) {
-    .finances-input {
-        max-width: 200px;
+    .finances-input{
+        border: 2px solid #0275d8;
+        border-radius: 5px;
     }
-    .finances-input-title, .finances-btn {
+    .finances-input-title{
         min-width: 150px;
     }
+    .finances-btn{
+        max-width: 50px;
+    }
+}
 
+.mt-1-5{
+    margin-top: 6px;
 }

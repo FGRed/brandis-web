@@ -12,36 +12,38 @@ function CompanyInfo(props) {
         textColor = 'text-muted'
     }
 
-    const [bgame, setBgame] = useState(null)
+    const [gameDTO, setGameDTO] = useState(null)
     const [style, setStyle] = useState(null)
 
         useEffect(() => {
             axios.get("/get-bgame/").then((response) => {
-                setBgame(response.data)
-                let percent = response.data.brand + "%"
-                setStyle({width: percent})
-
+                setGameDTO(response.data)
+                let bsavedGame = response.data.bsavedGame;
+                if(bsavedGame !== null){
+                    let percent = response.data.bsavedGame.brand + "%"
+                    setStyle({width: percent})
+                }
             }).catch(reason => {
                 let fmode = document.querySelector("#fmode").value;
                 if(!fmode){
-                    setBgame({companyName: "Placeholder", brand: 25.0})
+                    setGameDTO({companyName: "Placeholder", brand: 25.0})
                     setStyle({width: "12%"})
                 }
             });
             }, [])
 
-    if(!bgame) return null;
+    if(!gameDTO) return null;
 
         return (
-            <div className="ml-auto w-100 ps-2" hidden={bgame.companyName === ""}>
+            <div className="ml-auto w-100 ps-2" hidden={gameDTO.bgame.companyName === ""}>
                 <div className="row">
                     <div className="col justify-content-start">
-                        <h5 className={"text-start " + textColor}>{bgame.companyName}</h5>
+                        <h5 className={"text-start " + textColor}>{gameDTO.bgame.companyName}</h5>
                     </div>
                 </div>
                 <div className="progress ml-auto" style={{height: "12px"}}>
                     <div className="progress-bar progress-bar-striped" style={style} role="progressbar" aria-valuenow="75"  aria-valuemin="0"
-                         aria-valuemax="100">{bgame.brand + "%"}</div>
+                         aria-valuemax="100">{gameDTO.bsavedGame !== null && gameDTO.bsavedGame.brand + "%"}</div>
                 </div>
             </div>
         );

@@ -43,7 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/module-login/",
                         "/create-new-game/",
                         "/module-logout/",
-                        "/webjars/**")
+                        "/webjars/**",
+                        "/move-funds/**"
+                        ,"/move-funds/"
+                        ,"/transfer-funds/**"
+                        ,"/transfer-funds/")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -51,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**", "/register/**", "/register/","/target/classes/static/**", "/", "/get-bgame/", "/module-login/","/create-new-game/", "/module-logout/")
+                .ignoringAntMatchers("/h2-console/**", "/register/**", "/move-funds/", "/move-funds/**" +
+                        "/transfer-funds/**","/transfer-funds/",",/register/","/target/classes/static/**", "/", "/get-bgame/", "/module-login/","/create-new-game/", "/module-logout/")
                 .and()
                 .headers().frameOptions().disable()
                 .and()
