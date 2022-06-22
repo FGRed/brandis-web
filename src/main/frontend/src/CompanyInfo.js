@@ -26,7 +26,7 @@ function CompanyInfo(props) {
             }).catch(reason => {
                 let fmode = document.querySelector("#fmode").value;
                 if(!fmode){
-                    setGameDTO({companyName: "Placeholder", brand: 25.0})
+                    setGameDTO({bgame:{companyName: "Placeholder", brand: 25.0}, bsavedGame:{brand:20.0}})
                     setStyle({width: "12%"})
                 }
             });
