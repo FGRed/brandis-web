@@ -45,11 +45,11 @@ export default function LoanModal(props){
             <Form id="transferForm">
                 <Modal.Body>
                     <Row>
-                        <Col><h6>{"Company Funds: " + (props.funds - loanSum) + ",-"}</h6></Col>
+                        <Col><span>{"Company Funds: " + (props.funds - loanSum) + ",-"}</span></Col>
                         <input type="hidden" name="funder" value={props.funds - loanSum}/>
-                        <Col className="col-6"><FormRange min={0} value={loanSum} max={props.loan} onChange={()=>setLoanSum(document.querySelector("#range").value)} id="range"></FormRange></Col>
+                        <Col className="col-4"><FormRange min={0} value={loanSum} max={props.loan} onChange={()=>setLoanSum(document.querySelector("#range").value)} id="range"></FormRange></Col>
                         <input type="hidden" name="receiver" value={props.loan - loanSum}/>
-                        <Col><h6>{"Loan: " + (props.loan - loanSum) + ",-"}</h6></Col>
+                        <Col><span>{"Loan: " + (props.loan - loanSum) + ",-"}</span></Col>
                         <input type="hidden" name="method" value="loan"/>
                     </Row>
                 </Modal.Body>

@@ -43,11 +43,11 @@ export default function TransferModal(props){
             <Form id="transferForm">
             <Modal.Body>
                 <Row>
-                    <Col><h6>{props.from + ": " + (props.funds - transferSum) + ",-"}</h6></Col>
+                    <Col className="col"><span>{props.from + ": " + (props.funds - transferSum) + ",-"}</span></Col>
                     <input type="hidden" name="funder" value={props.funds - transferSum}/>
-                    <Col className="col-5"><FormRange value={transferSum} max={props.funds} onChange={()=>setTransferSum(document.querySelector("#range").value)} id="range"></FormRange></Col>
+                    <Col className="col-4"><FormRange value={transferSum} max={props.funds} onChange={()=>setTransferSum(document.querySelector("#range").value)} id="range"></FormRange></Col>
                     <input type="hidden" name="receiver" value={props.companyFunds + + transferSum}/>
-                    <Col><h6>{props.to + ": " + (props.companyFunds + + transferSum) + ",-"}</h6></Col>
+                    <Col className="col"><span>{props.to + ": " + (props.companyFunds + + transferSum) + ",-"}</span></Col>
                     <input type="hidden" name="method" value={props.method}/>
                 </Row>
             </Modal.Body>

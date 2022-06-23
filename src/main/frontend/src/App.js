@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from "./Navbar";
 import FinancesInfo from "./FinancesInfo";
+import Main from "./Main";
 
 function App() {
 
@@ -10,8 +11,8 @@ function App() {
       <>
         <Navbar userLoggedIn = {userLoggedIn}/>
         <div className="container">
-
             <FinancesInfo/>
+            <Main/>
         </div>
       </>
   );
