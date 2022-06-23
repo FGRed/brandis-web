@@ -8,6 +8,7 @@ export default function Game(){
         <>
             <Row className="shadow-sm px-2 py-3 my-3 mx-1 border">
                 <Col><MerchantComponent/></Col>
+                <Col><MerchantComponent/></Col>
             </Row>
         </>
     )

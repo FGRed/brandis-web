@@ -9,7 +9,7 @@ export default function MerchantComponent(){
     var selectedElements = []
 
     const employees = [
-        {name:"Erkki", wage:1000.0},
+        {name:"Erkki",  wage:1000.0},
         {name:"Erkki2", wage:1000.0},
         {name:"Erkki3", wage:1000.0},
         {name:"Erkki4", wage:1000.0},
@@ -67,7 +67,7 @@ export default function MerchantComponent(){
         let employeeOpt = employeeSel.options[employeeSel.selectedIndex]
         let employee = employeeOpt.text
         let wageSel = document.querySelector("#salarySelect")
-        let wageOpt = wageSel.options[employeeSel.selectedIndex]
+        let wageOpt = wageSel.options[wageSel.selectedIndex]
         let wage = wageOpt.text
 
         let table = document.querySelector("#employeeTable").getElementsByTagName('tbody')[0]
@@ -78,11 +78,12 @@ export default function MerchantComponent(){
         let nameText = document.createTextNode(employee)
         let wageText = document.createTextNode(wage)
 
+
+
         cell.appendChild(nameText)
         cell2.appendChild(wageText)
 
         employeeOpt.remove()
-        wageOpt.remove()
 
         //Do hire
     }
@@ -101,16 +102,22 @@ export default function MerchantComponent(){
             <Row>
                 <Col className="col-lg-8">
                     <select className="form-select" aria-label="Default select example" id="employeeSelect">
-                        <option defaultValue>Select merchant</option>
                         <option value="1">Tauno Jallinen</option>
                         <option value="2">Mauno Myyjä</option>
                     </select>
                 </Col>
                 <Col className="col">
                     <select className="form-select" aria-label="Default select example" id="salarySelect">
-                        <option defaultValue>Select wage</option>
                         <option value="1">500;-</option>
                         <option value="2">1000;-</option>
+                        <option value="1">1500;-</option>
+                        <option value="2">2000;-</option>
+                        <option value="1">2500;-</option>
+                        <option value="2">3000;-</option>
+                        <option value="1">3500;-</option>
+                        <option value="2">4000;-</option>
+                        <option value="2">4500;-</option>
+                        <option value="2">5000;-</option>
                     </select>
                 </Col>
             </Row>
@@ -134,7 +141,12 @@ export default function MerchantComponent(){
                 </Table>
             </div>
             <Row>
-                <Col className="mt-2 me-1"><Button onClick={()=>removeSelected()} style={{float:"right"}}>Remove</Button></Col>
+                <Col className="mt-2 me-1">
+                    <Button onClick={()=>removeSelected()} style={{float:"right"}}>
+                        Fire
+                        <i className="fa-solid fa-hand-point-right ms-2"></i>
+                    </Button>
+                </Col>
             </Row>
         </>
 

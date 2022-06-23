@@ -23,21 +23,27 @@ function Menu(props){
                 <h6 className="mb-2">Company</h6>
                 <ul>
                     <li>
-                        <a href="#">Monthly Investment Accumulation</a>
+                        <a href="#">Main</a>
                     </li>
                     <li>
-                        <a href="#">Annual Investment Accumulation</a>
+                        <a href="#">Proceed Month</a>
                     </li>
-
                     <li>
                         <a href="#">Bank</a>
                     </li>
                     <li>
                         <a href="#">Charity</a>
                     </li>
+                </ul>
+                <h6 className="mb-2">Stats</h6>
+                <ul>
                     <li>
-                        <a href="#">Stats</a>
+                        <a href="#">Monthly Investment Accumulation</a>
                     </li>
+                    <li>
+                        <a href="#">Annual Investment Accumulation</a>
+                    </li>
+
                 </ul>
                 <h6 className="mb-2">Game</h6>
                 <ul>

@@ -50,12 +50,12 @@ const changeState=()=>{
 if(!gameDTO) return null;
 return (
     <>{gameDTO.bsavedGame !== null &&
-        <section className="w-100 mt-4 shadow-sm p-3 rounded-3 border">
+        <section className="mt-4 shadow-sm p-3 rounded-3 border finances">
             <Row className="g-0 mb-2">
-                <Col className="col-auto p-1 col-sm-2 finances-input-title rounded-2">
+                <Col className="col-auto p-1 col-sm-3 finances-input-title rounded-2">
                     <h6 className="align-middle">Your Funds</h6>
                 </Col>
-                <Col className="p-1 col-lg-9 finances-input">
+                <Col className="p-1 col-lg-7 finances-input">
                     <Form.Text className="align-middle" id="finances">{gameDTO.bsavedGame.userFunds},-
                         <i className="fa fa-hand-holding-dollar mt-1-5 me-2" style={{float:"right"}}></i>
                     </Form.Text>
@@ -65,10 +65,10 @@ return (
                 </Col>
             </Row>
             <Row className="g-0 mb-2">
-                <Col className="col-auto p-1 col-sm-2 finances-input-title rounded-2">
+                <Col className="col-auto p-1 col-sm-3 finances-input-title rounded-2">
                     <h6 className="align-middle company-funds">Company Funds</h6>
                 </Col>
-                <Col className="p-1 col-lg-9 finances-input">
+                <Col className="p-1 col-lg-7 finances-input">
                     <Form.Text className="align-middle" id="funds">{gameDTO.bsavedGame.companyFunds},-
                         <i className="fa fa-sack-dollar mt-1-5 me-2" style={{float:"right"}}></i>
                     </Form.Text>
@@ -78,10 +78,10 @@ return (
                 </Col>
             </Row>
             <Row className="g-0">
-                <Col className="col-auto p-1 col-sm-2 finances-input-title rounded-2">
+                <Col className="col-auto p-1 col-sm-3 finances-input-title rounded-2">
                     <h6 className="align-middle">Loan</h6>
                 </Col>
-                <Col className="p-1 col-lg-9 finances-input">
+                <Col className="p-1 col-lg-7 finances-input">
                     <Form.Text className="align-middle" id="loan">{gameDTO.bsavedGame.loanFunds},-
                         <i className="fa fa-money-check-alt mt-1-5 me-2" style={{float:"right"}}></i>
                     </Form.Text>
