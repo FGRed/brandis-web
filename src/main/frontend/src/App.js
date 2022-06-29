@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from "./Navbar";
 import FinancesInfo from "./FinancesInfo";
-import Main from "./Main";
+import Game from "./Game";
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
         <Navbar userLoggedIn = {userLoggedIn}/>
         <div className="container">
             <FinancesInfo/>
-            <Main/>
+            <Game/>
         </div>
       </>
   );

@@ -47,7 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/move-funds/**"
                         ,"/move-funds/"
                         ,"/transfer-funds/**"
-                        ,"/transfer-funds/")
+                        ,"/transfer-funds/"
+                        ,"/employee/current-employees/"
+                        ,"/employee/fire-employee/"
+                        ,"/employee/fire-employees/"
+                        ,"/employee/fire-employee/**",
+                        "/employee/hire-employee/",
+                        "/employee/change-salary/")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -55,8 +61,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**", "/register/**", "/move-funds/", "/move-funds/**" +
-                        "/transfer-funds/**","/transfer-funds/",",/register/","/target/classes/static/**", "/", "/get-bgame/", "/module-login/","/create-new-game/", "/module-logout/")
+                .ignoringAntMatchers("/h2-console/**",
+                        "/register/**",
+                        "/move-funds/",
+                        "/move-funds/**" +
+                        "/transfer-funds/**",
+                        "/transfer-funds/",
+                        ",/register/",
+                        "/target/classes/static/**",
+                        "/",
+                        "/get-bgame/",
+                        "/module-login/",
+                        "/create-new-game/",
+                        "/module-logout/",
+                        "/employee/current-employees/",
+                        "/employee/fire-employee/",
+                        "/employee/fire-employee/**",
+                        "/employee/hire-employee/",
+                        "/employee/change-salary/"
+                        ,"/employee/fire-employees/")
                 .and()
                 .headers().frameOptions().disable()
                 .and()

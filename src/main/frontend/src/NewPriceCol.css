@@ -1,0 +1,24 @@
+.form-control-xs {
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.1rem 0.2rem;
+    font-size: 0.60rem;
+    border-radius: 0.2rem;
+}
+.form-control-xs::-webkit-file-upload-button {
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+    -webkit-margin-end: 0.5rem;
+    margin-inline-end: 0.5rem;
+}
+.form-control-xs::file-selector-button {
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+    -webkit-margin-end: 0.5rem;
+    margin-inline-end: 0.5rem;
+}
+.form-control-xs::-webkit-file-upload-button {
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+    -webkit-margin-end: 0.5rem;
+    margin-inline-end: 0.5rem;
+}

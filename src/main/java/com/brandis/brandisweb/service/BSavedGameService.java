@@ -60,13 +60,16 @@ public class BSavedGameService implements BaseService<BSavedGame> {
 
     public GameDTO getRecentSavedGame(){
         BUser loggedInUser = currentUserService.getUser();
-        List<BGame> bGames = loggedInUser.getBgames();
         GameDTO gameDTO = new GameDTO();
-        if(!bGames.isEmpty()) {
-            BGame bGame = bGames.get(bGames.size() - 1);
-            List<BSavedGame> bSavedGames = bGame.getSaves();
-            gameDTO.setBGame(bGame);
-            gameDTO.setBSavedGame(bSavedGames.get(bSavedGames.size()-1));
+        if(loggedInUser != null) {
+            List<BGame> bGames = loggedInUser.getBgames();
+
+            if (!bGames.isEmpty()) {
+                BGame bGame = bGames.get(bGames.size() - 1);
+                List<BSavedGame> bSavedGames = bGame.getSaves();
+                gameDTO.setBGame(bGame);
+                gameDTO.setBSavedGame(bSavedGames.get(bSavedGames.size() - 1));
+            }
         }
         return gameDTO;
     }

@@ -1,94 +1,185 @@
-import Row from "react-bootstrap/Row";
+import Row from "react-bootstrap/Row"
+import React, {useState} from "react"
 import Col from "react-bootstrap/Col";
 import {Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./Table.css"
+import axios from "axios";
 
 export default function MerchantComponent(){
 
-    var selectedElements = []
+    const [emplS, setEmpls] = useState(null);
+    const [selectedRows, setSelectedRows] = useState([])
+    const [availableEmployee, setAvailableEmployee] = useState([])
+    const [monthlySalaryExpenses, setMonthlySalaryExpenses]  = useState(0.0)
 
-    const employees = [
-        {name:"Erkki",  wage:1000.0},
-        {name:"Erkki2", wage:1000.0},
-        {name:"Erkki3", wage:1000.0},
-        {name:"Erkki4", wage:1000.0},
-        {name:"Erkki5", wage:1000.0}]
-    const empl = employees.map((employee) =>
-        <tr>
-            <td><div suppressContentEditableWarning={true}
-                     onBlur={(event)=>focusLost(event)}
-                     onClick={(event)=>changeComponent(event)}>{employee.name}</div></td>
-            <td><div suppressContentEditableWarning={true}
-                     onBlur={(event)=>focusLost(event)}
-                     onClick={(event)=>changeComponent(event)}>{employee.wage}</div></td>
-        </tr>
-    );
+    React.useEffect(() => {
+        getData()
+    }, [])
+
+    const getData=()=>{
+        const fmode = document.querySelector("#fmode").value;
+
+        if(fmode !== "") {
+            axios.get("/employee/current-employees/").then((response) => {
+                setMonthlySalaryExpenses(response.data.salaryExpense)
+                setEmpls(response.data.hiredEmployees.map((hiredEmployee) =>
+                    <tr id={hiredEmployee.id}>
+                        <td>
+                            <div suppressContentEditableWarning={true}
+                                 onClick={(event)=>handleClick(event)}>{hiredEmployee.employee.name}</div>
+                        </td>
+                        <td>
+                            <div suppressContentEditableWarning={true}
+                                 onBlur={(event)=>focusLost(event)}
+                                 onClick={(event)=>changeComponent(event)}>{hiredEmployee.salary};-
+                        </div>
+                        </td>
+                        <td style={{textAlign:"center"}}>
+                            <input className="form-check-input" type="checkbox"/>
+                        </td>
+                    </tr>
+                ))
+                setAvailableEmployee(response.data.availableEmployees.map((employee) =>
+                    <option id={employee.id}>{employee.name}</option>
+                ))
+            }
+            )
+        }
+    }
+
+
+
 
     const changeComponent=(event)=>{
         let div = event.target
-        if(event.detail === 1){
+        if(event.detail === 1) {
             let div = event.currentTarget
             let td = div.parentElement.parentElement
-            console.log(td)
             if(!td.classList.contains("bg-primary")) {
                 td.classList.add("bg-primary")
-                selectedElements.push(td)
+                selectedRows.push(td)
             }else{
                 td.classList.remove("bg-primary")
-                selectedElements = selectedElements.filter((item)=>{
+                setSelectedRows(selectedRows.filter((item)=>{
                     return item !== td;
-                });
+                }))
             }
         }else if(event.detail === 2){
+            let salary = div.innerHTML
+            div.innerHTML = ''
+            div.insertAdjacentHTML(
+                'beforeend',
+                '<select id = "employeeSelTable" class="w-100">' +
+                '<option value="500">500;-</option>' +
+                '<option value="1000">1000;-</option>' +
+                '<option value="1500">1500;-</option>' +
+                '<option value="2000">2000;-</option>' +
+                '<option value="2500">2500;-</option>' +
+                '<option value="3000">3000;-</option>' +
+                '<option value="3500">3500;-</option>' +
+                '<option value="4000">4000;-</option>' +
+                '<option value="4500">4500;-</option>' +
+                '<option value="5000">5000;-</option>' +
+            '</select>')
 
-            div.setAttribute("contenteditable", "true")
+            document.querySelector("#employeeSelTable").value = salary
+
             div.focus();
         }
     }
 
-    const focusLost=(event)=>{
-        let div = event.target
-        div.setAttribute("contenteditable", "false");
-        console.log("Focus lost")
-        //Do Save
+    const handleClick=(event)=>{
+        if(event.detail === 1) {
+            let div = event.currentTarget
+            let td = div.parentElement.parentElement
+            if(!td.classList.contains("bg-primary")) {
+                td.classList.add("bg-primary")
+                selectedRows.push(td)
+            }else{
+                td.classList.remove("bg-primary")
+                setSelectedRows(selectedRows.filter((item)=>{
+                    return item !== td;
+                }))
+            }
+        }
     }
 
-    const removeSelected=()=>{
-        selectedElements.forEach(element=>{
-            element.remove()
+    const focusLost=(event)=>{
+        let div = event.target.parentElement
+        const id = div.parentElement.parentElement.id
+        const select = document.querySelector("#employeeSelTable")
+        const salary = select.options[select.selectedIndex].value
+
+        axios.post("/employee/change-salary/",
+            {
+                id : id,
+                salary: salary
+            },
+            {
+                headers:
+                    {"content-type" : "application/json"}
+            }
+        ).then(()=>{
+            getData()
+            div.innerHTML = salary + ';-'
+        });
+
+    }
+
+    const selectAll=(event)=>{
+        const checked = event.target.checked
+        document.querySelector("#employeeTable").querySelectorAll(".form-check-input").forEach((cb)=>{
+                cb.checked = checked
         })
-        //Remove elements post
-        selectedElements = []
+
+    }
+
+    const fireSelected=()=>{
+        let formData = new FormData();
+        document.querySelector("#employeeTable").querySelector("tbody").querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+            formData.append("employeeRow", cb.parentElement.parentElement.id);
+        })
+
+        axios.post("/employee/fire-employees/",
+                formData,
+            {
+                headers:
+                    {"content-type" : "multipart/form-data"}
+            }
+        ).then((response)=>{
+            console.log(response)
+            if(response.status === 200){
+                getData();
+                document.querySelector("#selectAll").checked = false
+
+            }else if(response.status === 400){
+                alert("400 Bad Request.")
+            }else{
+                alert("Unexpected error")
+            }
+        })
+
+        getData();
+
     }
 
     const hire=()=>{
         let employeeSel = document.querySelector("#employeeSelect")
         let employeeOpt = employeeSel.options[employeeSel.selectedIndex]
-        let employee = employeeOpt.text
-        let wageSel = document.querySelector("#salarySelect")
-        let wageOpt = wageSel.options[wageSel.selectedIndex]
-        let wage = wageOpt.text
+        let salarySel = document.querySelector("#salarySelect")
+        let salarySelOpt = salarySel.options[salarySel.selectedIndex]
 
-        let table = document.querySelector("#employeeTable").getElementsByTagName('tbody')[0]
-        let row = table.insertRow(-1)
-        let cell = row.insertCell(0)
-        let cell2 = row.insertCell(1)
-
-        let nameText = document.createTextNode(employee)
-        let wageText = document.createTextNode(wage)
-
-
-
-        cell.appendChild(nameText)
-        cell2.appendChild(wageText)
-
-        employeeOpt.remove()
-
-        //Do hire
+        axios.post("/employee/hire-employee/",
+            {
+                id : employeeOpt.getAttribute("id"),
+                name: employeeOpt.text,
+                salary: salarySelOpt.value
+            }
+        ).then(()=>{
+            getData()
+        });
     }
-
-
 
     return(
         <>
@@ -96,28 +187,27 @@ export default function MerchantComponent(){
                 <Col><h6>Hire a Merchant</h6></Col>
             </Row>
             <Row className="mb-2">
-                <Col className="col-lg-2"><span>Merchant</span></Col>
-                <Col><span>Wage</span></Col>
+                <Col className="col-lg-8"><span>Merchant</span></Col>
+                <Col><span>Salary</span></Col>
             </Row>
             <Row>
                 <Col className="col-lg-8">
                     <select className="form-select" aria-label="Default select example" id="employeeSelect">
-                        <option value="1">Tauno Jallinen</option>
-                        <option value="2">Mauno Myyjä</option>
+                        {availableEmployee}
                     </select>
                 </Col>
                 <Col className="col">
                     <select className="form-select" aria-label="Default select example" id="salarySelect">
-                        <option value="1">500;-</option>
-                        <option value="2">1000;-</option>
-                        <option value="1">1500;-</option>
-                        <option value="2">2000;-</option>
-                        <option value="1">2500;-</option>
-                        <option value="2">3000;-</option>
-                        <option value="1">3500;-</option>
-                        <option value="2">4000;-</option>
-                        <option value="2">4500;-</option>
-                        <option value="2">5000;-</option>
+                        <option value="500.0">500;-</option>
+                        <option value="1000.0">1000;-</option>
+                        <option value="1500.0">1500;-</option>
+                        <option value="2000.0">2000;-</option>
+                        <option value="2500.0">2500;-</option>
+                        <option value="3000.0">3000;-</option>
+                        <option value="3500.0">3500;-</option>
+                        <option value="4000.0">4000;-</option>
+                        <option value="4500.0">4500;-</option>
+                        <option value="5000.0">5000;-</option>
                     </select>
                 </Col>
             </Row>
@@ -125,24 +215,30 @@ export default function MerchantComponent(){
                 <Col><Button className="mt-2 me-1" style={{float:"right"}} onClick={()=>hire()}>Hire</Button></Col>
             </Row>
             <Row className="my-1">
-                <Col><h6>Employees</h6></Col>
+                <Col><h6>Hired Employees</h6></Col>
             </Row>
-            <div className="table-wrapper w-100">
+            <div className="table-wrapper w-100 border">
                 <Table bordered hover striped size="sm" id="employeeTable">
                     <thead>
                     <tr>
                         <th>Employee</th>
-                        <th>Wage</th>
+                        <th>Salary</th>
+                        <th style={{textAlign:"center"}}>
+                            <input id="selectAll" onClick={(event)=>selectAll(event)} className="form-check-input row-cb" type="checkbox"/>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
-                    {empl}
+                    {emplS}
                     </tbody>
                 </Table>
             </div>
             <Row>
                 <Col className="mt-2 me-1">
-                    <Button onClick={()=>removeSelected()} style={{float:"right"}}>
+                    <p>Monthly expenses: {monthlySalaryExpenses};-</p>
+                </Col>
+                <Col className="mt-2 me-1">
+                    <Button onClick={fireSelected} style={{float:"right"}}>
                         Fire
                         <i className="fa-solid fa-hand-point-right ms-2"></i>
                     </Button>

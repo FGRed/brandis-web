@@ -2,11 +2,13 @@ package com.brandis.brandisweb.service;
 
 import com.brandis.brandisweb.enums.Difficulty;
 import com.brandis.brandisweb.exception.GameException;
+import com.brandis.brandisweb.model.bemployee.BEmployee;
+import com.brandis.brandisweb.model.bemployee.BHiredEmployee;
 import com.brandis.brandisweb.model.bgame.BGame;
 import com.brandis.brandisweb.model.bgame.BSavedGame;
 import com.brandis.brandisweb.model.buser.BUser;
+import com.brandis.brandisweb.repository.BEmployeeRepository;
 import com.brandis.brandisweb.repository.BGameRepository;
-import com.brandis.brandisweb.repository.BSavedGameRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,10 @@ public class BGameService implements BaseService<BGame> {
 
     private final BSavedGameService bSavedGameService;
     private final CurrentUserService currentUserService;
+
+    private final BHiredEmployeeService hiredEmployeeService;
+
+    private final BEmployeeRepository employeeRepository;
 
     @Override
     public List<BGame> findAll() {
@@ -62,12 +68,13 @@ public class BGameService implements BaseService<BGame> {
 
     public BGame createNew(String companyName, List<String> difficulties){
 
+        BSavedGame bSavedGame = new BSavedGame();
         Difficulty difficulty = Difficulty.valueOf(difficulties.get(0).toUpperCase());
         double balance = 0.0;
         double brand = 0.0;
         double loan = 100.0;
         if(difficulty == Difficulty.EASY){
-            balance = 1000000000.0;
+            balance = 10000.0;
             brand = 30.0;
         }else if(difficulty == Difficulty.NORMAL){
             balance = 5000.0;
@@ -79,9 +86,32 @@ public class BGameService implements BaseService<BGame> {
         }else if(difficulty == Difficulty.VERY_HARD){
             balance = 100.0;
             brand = 0.0;
+        }else if(difficulty == Difficulty.DEV_TEST){
+            balance = 100000000.0;
+            brand = 30.0;
+
         }
 
-        BSavedGame bSavedGame = new BSavedGame();
+        BEmployee employee = new BEmployee();
+        employee.setName("Bertti Backend");
+        employeeRepository.save(employee);
+
+        BEmployee employee2 = new BEmployee();
+        employee2.setName("Erkki esimerkki");
+        employeeRepository.save(employee2);
+
+        BEmployee employee3 = new BEmployee();
+        employee3.setName("Tauno Jallinen");
+        employeeRepository.save(employee3);
+
+        bSavedGame.getAvailableEmployees().add(employee2);
+        bSavedGame.getAvailableEmployees().add(employee3);
+
+        BHiredEmployee bHiredEmployee = new BHiredEmployee(employee, 2000.0);
+        bHiredEmployee = hiredEmployeeService.save(bHiredEmployee);
+        bSavedGame.getHiredEmployees().add(bHiredEmployee);
+
+
         bSavedGame.setUserFunds(balance);
         bSavedGame.setBrand(brand);
         bSavedGame.setLoanFunds(loan);
